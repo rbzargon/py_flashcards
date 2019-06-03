@@ -1,3 +1,10 @@
+"""
+Cooper King
+CS521
+Due June 30, 2019
+Term project
+Flashcard application GUI
+"""
 from tkinter import *
 from tkinter import ttk
 
