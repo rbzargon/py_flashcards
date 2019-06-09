@@ -13,7 +13,7 @@ root = Tk()
 root.title("PyFlashcards")
 root_frame = ttk.Frame(root, padding="8 8 8 8")
 
-progress_frame = ttk.LabelFrame(root_frame, text="Progress")
+progress_frame = ttk.Frame(root_frame)
 p = ttk.Progressbar(root_frame, maximum=10, value=5)
 
 question_frame = ttk.LabelFrame(root_frame, text="Question")
@@ -29,10 +29,10 @@ for a in (a1, a2, a3, a4):
 
 root_frame.grid(row=0, sticky='nsew')
 
-progress_frame.grid(row=0, sticky='nsew')
+progress_frame.grid(row=0, sticky='ew', )
 p.grid(column=0, row=0, sticky='nsew')
 
-question_frame.grid(row=1, sticky='nsew')
+question_frame.grid(row=1, sticky='nsew', pady='10')
 q.grid(column=0, row=0, sticky='nsew')
 
 answer_frame.grid(row=2, sticky='nsew')
@@ -47,8 +47,8 @@ root.rowconfigure(0, weight=1)
 
 root_frame.columnconfigure(0, weight=1)
 root_frame.rowconfigure(0, weight=1)
-root_frame.rowconfigure(1, weight=1)
-root_frame.rowconfigure(2, weight=1)
+root_frame.rowconfigure(1, weight=4)
+root_frame.rowconfigure(2, weight=4)
 
 progress_frame.rowconfigure(0, weight=1)
 progress_frame.columnconfigure(0, weight=1)
