@@ -1,9 +1,18 @@
-import tkinter as tk
-from tkinter import filedialog, ttk
+"""
+Cooper King
+CS521
+Due June 30, 2019
+Term project
+Flashcard application GUI - main view
+"""
 
-from progressFrame import ProgressFrame
-from questionFrame import QuestionFrame
-from answerFrame import AnswerFrame
+import tkinter as tk
+from tkinter import ttk
+
+from .progress import ProgressView
+from .question import QuestionView
+from .answer import AnswerView
+
 
 class Main(tk.Tk):
 
@@ -19,10 +28,34 @@ class Main(tk.Tk):
         self.frame.rowconfigure(2, weight=4)
         self.frame.rowconfigure(3, weight=1)
 
-        self.progress_frame = ProgressFrame(self.frame)
-        self.question_frame = QuestionFrame(self.frame)
-        self.answer_frame = AnswerFrame(self.frame)
+        self.progress_view = ProgressView(self.frame)
+        self.question_view = QuestionView(self.frame)
+        self.answer_view = AnswerView(self.frame)
 
-        self.progress_frame.grid(row=0, sticky='nsew', )
-        self.question_frame.grid(row=1, sticky='nsew', pady='10')
-        self.answer_frame.grid(row=2, sticky='nsew')
+        self.progress_view.grid(row=0, sticky='nsew', )
+        self.question_view.grid(row=1, sticky='nsew', pady='10')
+        self.answer_view.grid(row=2, sticky='nsew')
+
+    @property
+    def question(self):
+        pass  # TODO get question from frame
+
+    @property.setter
+    def question(self):
+        pass
+
+    @property
+    def correct_answer(self):
+        pass
+
+    @property.setter
+    def correct_answer(self):
+        pass
+
+    @property
+    def answers(self):
+        pass
+
+    @property.setter
+    def answers(self):
+        pass
