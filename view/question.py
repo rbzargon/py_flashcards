@@ -1,9 +1,18 @@
+"""
+Cooper King
+CS521
+Due June 30, 2019
+Term project
+Flashcard application - view for a question
+"""
+
 import tkinter as tk
 from tkinter.ttk import LabelFrame
 from typing import List
 from utils import pad_children
 
-class QuestionFrame(LabelFrame):
+
+class QuestionView(LabelFrame):
 
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, text='Question', **kwargs)

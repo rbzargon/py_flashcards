@@ -1,10 +1,19 @@
+"""
+Cooper King
+CS521
+Due June 30, 2019
+Term project
+Flashcard application GUI - view to hold answers
+"""
+
 import tkinter as tk
 from tkinter import ttk
 from typing import List
 from utils import pad_children
 from typing import Tuple
 
-class AnswerFrame(ttk.LabelFrame):
+
+class AnswerView(ttk.LabelFrame):
 
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, text="Answers", **kwargs)
@@ -25,6 +34,8 @@ class AnswerFrame(ttk.LabelFrame):
         self.rowconfigure(0, weight=1)
         pad_children(self)
 
-    def set_answers(self, answers: Tuple[str, str, str, str], correct_index: int):
+    def set_answers(
+            self, answers: Tuple[str, str, str, str],
+            correct_index: int):
         for answer_button, answer in zip(self.answers, answers):
             answer_button.config(text=answer)
