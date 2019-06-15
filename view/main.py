@@ -40,7 +40,7 @@ class Main(tk.Tk):
     def question(self):
         pass  # TODO get question from frame
 
-    @property.setter
+    @question.setter
     def question(self):
         pass
 
@@ -48,7 +48,7 @@ class Main(tk.Tk):
     def correct_answer(self):
         pass
 
-    @property.setter
+    @correct_answer.setter
     def correct_answer(self):
         pass
 
@@ -56,6 +56,6 @@ class Main(tk.Tk):
     def answers(self):
         pass
 
-    @property.setter
+    @answers.setter
     def answers(self):
         pass
