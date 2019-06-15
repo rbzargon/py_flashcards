@@ -3,18 +3,15 @@ Cooper King
 CS521
 Due June 30, 2019
 Term project
-Flashcard application GUI
+Flashcard application - main application
 """
 
 import csv
 import tkinter as tk
-from tkinter import filedialog, ttk
+from tkinter import filedialog
+from typing import Iterable, Tuple
 
-from typing import Set, Tuple
-
-from view.answerFrame import AnswerFrame
-from view.progressFrame import ProgressFrame
-from view.questionFrame import QuestionFrame
+from sys import stderr
 
 
 class App(tk.Tk):
@@ -22,23 +19,42 @@ class App(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        rows = App.get_rows_from_file()
 
-       
+    @staticmethod
+    def get_rows_from_file() -> Iterable[Tuple[str, str]]:
+        '''Gets user input for a file that is semicolon delimited csv with two
+        entries per line (a question and an answer), returns the rows'''
         file_valid = False
         while not file_valid:
-            self.file_name = filedialog.askopenfilename(
+            file_name = filedialog.askopenfilename(
                 filetypes=(('Csv files', '*.csv'), ('All types', '*')),
                 title="Choose a flashcard Q/A csv with semicolon delimiters...")
-            with open('planets.csv', 'r', newline='') as in_csv:
-                input_reader = csv.reader(in_csv, delimiter=';')
+            try:
+                with open(file_name, 'r', newline='') as in_csv:
+                    input_reader = csv.reader(in_csv, delimiter=';')
+                    rows = [*input_reader]
+                    if all([length == 2 for length in map(len, rows)]):
+                        file_valid = True
+                    else:
+                        bad_index = 0
+                        bad_row_len = 0
+                        for idx, row in enumerate(rows):
+                            if len(row) != 2:
+                                bad_index = idx
+                                bad_row_len = len(row)
+                                break
+                        print(
+                            'Expected length 2 (question/answer) but found length'
+                            f' {bad_row_len} on row {bad_index}.\n'
+                            'File must be delimited by a semicolon'
+                            ' and have a question/answer entery per line',
+                            file=stderr)
+                        exit(-1)
+            except IOError as e:
+                print(f'Error opening file: {e}', file=stderr)
 
-
-                file_valid = True
-
-        print(self.answer_to_question)
-        print(self.question_to_answer)
-
-
+        return rows
 
 
 if __name__ == '__main__':
