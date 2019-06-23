@@ -8,17 +8,17 @@ Flashcard application GUI - main view
 
 import tkinter as tk
 from tkinter import ttk
+from typing import Iterable
 
 from .progress import ProgressView
 from .question import QuestionView
 from .answer import AnswerView
 
 
-class Main(tk.Tk):
+class MainView(tk.Tk):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
-
+        super().__init__(*args, **kwargs)
         self.frame = ttk.Frame(self, padding='8 8 8 8')
 
         self.frame.grid(row=0, sticky='nsew')
@@ -37,25 +37,25 @@ class Main(tk.Tk):
         self.answer_view.grid(row=2, sticky='nsew')
 
     @property
-    def question(self):
-        pass  # TODO get question from frame
+    def question(self) -> str:
+        return self.question_view.question
 
     @question.setter
-    def question(self):
-        pass
+    def question(self, question: str) -> None:
+        self.question_view.question = question
 
     @property
-    def correct_answer(self):
-        pass
+    def correct_answer(self) -> str:
+        return self.answer_view.correct_answer
 
     @correct_answer.setter
-    def correct_answer(self):
-        pass
+    def correct_answer(self, answer: str) -> None:
+        self.answer_view.correct_answer = answer
 
     @property
-    def answers(self):
-        pass
+    def answers(self) -> Iterable[str]:
+        return self.answer_view.answers
 
     @answers.setter
-    def answers(self):
-        pass
+    def answers(self, answers: Iterable[str]) -> None:
+        self.answer_view.answers = answers
