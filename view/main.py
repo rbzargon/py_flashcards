@@ -8,7 +8,7 @@ Flashcard application GUI - main view
 
 import tkinter as tk
 from tkinter import ttk
-from typing import Iterable
+from typing import Callable, Iterable
 
 from .progress import ProgressView
 from .question import QuestionView
@@ -17,7 +17,9 @@ from .answer import AnswerView
 
 class MainView(tk.Tk):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(
+            self, next_handler: Callable[[], None], maximum: int,
+            *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.frame = ttk.Frame(self, padding='8 8 8 8')
 
@@ -28,13 +30,21 @@ class MainView(tk.Tk):
         self.frame.rowconfigure(2, weight=4)
         self.frame.rowconfigure(3, weight=1)
 
-        self.progress_view = ProgressView(self.frame)
+        self.progress_view = ProgressView(self.frame, maximum)
         self.question_view = QuestionView(self.frame)
-        self.answer_view = AnswerView(self.frame)
+        self.answer_view = AnswerView(self.frame, correct_handler=next_handler)
 
         self.progress_view.grid(row=0, sticky='nsew', )
         self.question_view.grid(row=1, sticky='nsew', pady='10')
         self.answer_view.grid(row=2, sticky='nsew')
+
+    @property
+    def progress_value(self) -> int:
+        return self.progress_view.value
+
+    @progress_value.setter
+    def progress_value(self, value: int) -> None:
+        self.progress_view.value = value
 
     @property
     def question(self) -> str:
