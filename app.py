@@ -8,7 +8,6 @@ Flashcard application - main application
 
 import csv
 import tkinter as tk
-from tkinter import filedialog
 from typing import Iterable, Tuple
 
 from sys import stderr
@@ -51,7 +50,7 @@ class App(tk.Tk):
                             'Expected length 2 (question/answer) but found length'
                             f' {bad_row_len} on row {bad_index}.\n'
                             'File must be delimited by a semicolon'
-                            ' and have a question/answer entery per line',
+                            ' and have a question/answer entry per line',
                             file=stderr)
                         exit(-1)
             except IOError as e:
