@@ -15,13 +15,15 @@ from .question import QuestionView
 from .answer import AnswerView
 
 
-class MainView(tk.Tk):
+class MainView:
     '''Main view with progress, question, and answer views'''
-    def __init__(
-            self, next_handler: Callable[[], None], maximum: int,
-            *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.frame = ttk.Frame(self, padding='8 8 8 8')
+
+    def __init__(self,
+                 parent: tk.Tk,
+                 next_handler: Callable[[], None],
+                 maximum: int,
+                 *args, **kwargs):
+        self.frame = ttk.Frame(parent, padding='8 8 8 8')
 
         self.frame.grid(row=0, sticky='nsew')
         self.frame.columnconfigure(0, weight=1)

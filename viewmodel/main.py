@@ -6,6 +6,7 @@ Due June 30, 2019
 Term project
 Flashcard application GUI - main viewmodel
 """
+from tkinter import Tk
 from typing import Iterable, Tuple
 from model.quiz import QuizModel
 from view.main import MainView
@@ -14,13 +15,14 @@ from view.main import MainView
 class MainViewModel:
     '''Controls overall model/view interactions'''
 
-    def __init__(self, rows: Iterable[Tuple[str, str]]):
+    def __init__(self, parent: Tk, rows: Iterable[Tuple[str, str]]):
         super().__init__()
 
         quiz_model = QuizModel(rows=rows)
         self.quizzes = tuple(quiz_model)
         self.index = 0
-        self.view = MainView(next_handler=self.next_handler,
+        self.view = MainView(parent=parent,
+                             next_handler=self.next_handler,
                              maximum=len(self.quizzes))
         self.next_handler()
 

@@ -22,9 +22,10 @@ class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.rows = self.get_rows_from_file()
-        self.viewmodel = MainViewModel(self.rows)
+        self.viewmodel = MainViewModel(parent=self, rows=self.rows)
 
-    def get_rows_from_file(self) -> Iterable[Tuple[str, str]]:
+    @staticmethod
+    def get_rows_from_file() -> Iterable[Tuple[str, str]]:
         '''Gets user input for a file that is semicolon delimited csv with two
         entries per line (a question and an answer), returns the rows'''
         file_valid = False
@@ -33,7 +34,6 @@ class App(tk.Tk):
                 filetypes=(('Csv files', '*.csv'),
                            ('All types', '*')),
                 title="Choose a flashcard Q/A csv with semicolon delimiters...")
-            App.withdraw(self)
             try:
                 with open(file_name, 'r', newline='') as in_csv:
                     input_reader = csv.reader(App.noncomment_filter(in_csv),
