@@ -22,8 +22,7 @@ class QuizModel:
     ['q1', 'q2', 'q3', 'q4']
     >>> sorted(answers)
     ['a1', 'a2', 'a3', 'a4']
-    >>> all([('a1','a2','a3','a4') == tuple(sorted(all_group)) for all_group in all_answers])
-    True"""
+    >>> assert all([('a1','a2','a3','a4') == tuple(sorted(all_group)) for all_group in all_answers]), 'Unexpected value for answers'"""
 
     def __init__(self, rows: Iterable[Tuple[str, str]]):
         self.answers: Set[str] = set()
@@ -70,4 +69,4 @@ class QuizModel:
 
 if __name__ == '__main__':
     from doctest import testmod
-    testmod()
+    testmod(verbose=True)
