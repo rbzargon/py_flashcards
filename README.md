@@ -1,5 +1,5 @@
 # py_flashcards
-Simple python tkinter/ttk GUI flashcard study app using the Python standard library
+Simple Python3 tkinter/ttk GUI flashcard study app using the standard library
 
 To run:
 - app.py
