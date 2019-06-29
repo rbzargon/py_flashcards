@@ -21,8 +21,7 @@ class MainView:
     def __init__(self,
                  parent: tk.Tk,
                  next_handler: Callable[[], None],
-                 maximum: int,
-                 *args, **kwargs):
+                 maximum: int):
         self.frame = ttk.Frame(parent, padding='8 8 8 8')
 
         self.frame.grid(row=0, sticky='nsew')
