@@ -21,9 +21,10 @@ Correct answer: {self.answer}
 Random answers: {self.all_answers}'''
 
     def __repr__(self) -> str:
-        return f'QuestionGroup\n{self.__str__()}'
+        return f'<QuestionGroup {(self.question, self.answer, str(self.all_answers))}>'
 
 if __name__ == '__main__':
+    #demo __str__/__repr__
     qg = QuestionGroup('q1', 'a1', ('a1','a2','a3','a4'))
     print('__str__', qg, sep='\n')
     print()
