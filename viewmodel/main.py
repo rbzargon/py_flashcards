@@ -19,8 +19,8 @@ class MainViewModel:
         super().__init__()
 
         quiz_model = QuizModel(rows=rows)
-        self.quizzes = tuple(quiz_model)
-        self.index = 0
+        self._quizzes = tuple(quiz_model)
+        self._index = 0
         self.view = MainView(parent=parent,
                              next_handler=self.next_handler,
                              maximum=len(self.quizzes))
@@ -29,11 +29,11 @@ class MainViewModel:
     def next_handler(self):
         '''Controls moving to the next quiz question, program exits when done'''
         if self.index < len(self.quizzes):
-            current_quiz = self.quizzes[self.index]
+            current_quiz = self._quizzes[self._index]
             self.view.question = current_quiz.question
             self.view.answers = current_quiz.all_answers
             self.view.correct_answer = current_quiz.answer
-            self.view.progress_value = self.index
+            self.view.progress_value = self._index
             self.index += 1
         else:
             exit(0)
