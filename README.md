@@ -4,7 +4,9 @@ Simple Python3 tkinter/ttk GUI flashcard study app using the standard library
 To run:
 - app.py
 - Choose a semicolon-delimited file - e.g. the provided 'planets.csv'
+![Uploading](docs/upload.PNG?raw=true "Uploading")
 - Answer the questions
+![Question](docs/question.PNG?raw=true "Question")
 
 Details:
 - User loads a semicolon-delimited file of questions/answers to study - see planets.csv for an example
