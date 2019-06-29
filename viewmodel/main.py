@@ -28,7 +28,7 @@ class MainViewModel:
 
     def next_handler(self):
         '''Controls moving to the next quiz question, program exits when done'''
-        if self.index < len(self._quizzes):
+        if self._index < len(self._quizzes):
             current_quiz = self._quizzes[self._index]
             self.view.question = current_quiz.question
             self.view.answers = current_quiz.all_answers
