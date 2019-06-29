@@ -10,16 +10,18 @@ import tkinter as tk
 from tkinter import ttk
 from typing import Callable, Iterable
 from utils import pad_children
+from functools import partial
 
 
 class AnswerView(ttk.LabelFrame):
-    CORRECT_STYLE = {'bg': 'green'}
-    INCORRECT_STYLE = {'bg': 'red'}
+    CORRECT_STYLE = {'bg': 'green', 'wraplength': 160, 'width': 20}
+    INCORRECT_STYLE = {'bg': 'red', 'wraplength': 160, 'width': 20}
+    BUTTON_STYLE = {'bg': 'white', 'wraplength': 160, 'width': 20}
 
     def __init__(
-            self, parent, correct_handler: Callable[[], None], *args, **kwargs):
+            self, parent, next_handler: Callable[[], None], *args, **kwargs):
         super().__init__(parent, *args, text="Answers", **kwargs)
-        self.correct_handler = correct_handler
+        self.next_handler = next_handler
         self.a1 = tk.Button(self, text="Answer 1")
         self.a2 = tk.Button(self, text="Answer 2")
         self.a3 = tk.Button(self, text="Answer 3")
@@ -50,8 +52,17 @@ class AnswerView(ttk.LabelFrame):
     def correct_answer(self, answer: str) -> None:
         for answer_button in self._answers:
             if answer_button['text'] == answer:
-                answer_button.config(
-                    command=self.correct_handler, **AnswerView.CORRECT_STYLE)
+                button_handler = partial(
+                    self.correct_handler, button=answer_button)
+                answer_button.config(command=button_handler)
+
+    def correct_handler(self, button: tk.Button) -> None:
+        '''Change the button style and call for next after one second'''
+        button.config(**AnswerView.CORRECT_STYLE)
+        button.after(1000, func=self.next_handler)
+
+    def incorrect_handler(self, button: tk.Button) -> None:
+        button.config(**AnswerView.INCORRECT_STYLE)
 
     @property
     def answers(self) -> Iterable[str]:
@@ -60,6 +71,8 @@ class AnswerView(ttk.LabelFrame):
     @answers.setter
     def answers(self, answers: Iterable[str]) -> None:
         for answer_button, answer in zip(self._answers, answers):
-            answer_button.config(text=answer, wraplength=160,
-                                 command=None,
-                                 **AnswerView.INCORRECT_STYLE)
+            button_handler = partial(
+                self.incorrect_handler, button=answer_button)
+            answer_button.config(command=button_handler,
+                                 text=answer,
+                                 **AnswerView.BUTTON_STYLE)
