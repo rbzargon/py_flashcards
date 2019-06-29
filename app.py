@@ -63,7 +63,7 @@ class App(tk.Tk):
         return rows
 
     @staticmethod
-    def noncomment_filter(rows):
+    def noncomment_filter(rows: Iterable[str]) -> Iterable[str]:
         return filter(lambda row: row.lstrip()[0] != '#', rows)
 
 
