@@ -15,9 +15,9 @@ from utils import pad_children
 
 class AnswerView(ttk.LabelFrame):
     '''Responsible for visual representation of quiz answers'''
-    CORRECT_STYLE = {'bg': 'green', 'wraplength': 160, 'width': 20}
-    INCORRECT_STYLE = {'bg': 'red', 'wraplength': 160, 'width': 20}
-    BUTTON_STYLE = {'bg': 'white', 'wraplength': 160, 'width': 20}
+    CORRECT_STYLE = {'bg': 'green', 'wraplength': 160, 'width': 22}
+    INCORRECT_STYLE = {'bg': 'red', 'wraplength': 160, 'width': 22}
+    BUTTON_STYLE = {'bg': 'white', 'wraplength': 160, 'width': 22}
 
     def __init__(
             self, parent, next_handler: Callable[[], None], *args, **kwargs):
