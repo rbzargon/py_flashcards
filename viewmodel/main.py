@@ -13,6 +13,7 @@ from view.main import MainView
 
 class MainViewModel:
     '''Controls overall model/view interactions'''
+
     def __init__(self, rows: Iterable[Tuple[str, str]]):
         super().__init__()
 
@@ -20,7 +21,7 @@ class MainViewModel:
         self.quizzes = tuple(quiz_model)
         self.index = 0
         self.view = MainView(next_handler=self.next_handler,
-                             maximum=len(self.quizzes))
+                             maximum=len(self.quizzes)-1)
         self.next_handler()
 
     def next_handler(self):
@@ -30,7 +31,7 @@ class MainViewModel:
             self.view.question = current_quiz.question
             self.view.answers = current_quiz.all_answers
             self.view.correct_answer = current_quiz.answer
-            self.index += 1
             self.view.progress_value = self.index
+            self.index += 1
         else:
             exit(0)
