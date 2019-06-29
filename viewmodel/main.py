@@ -12,7 +12,7 @@ from view.main import MainView
 
 
 class MainViewModel:
-
+    '''Controls overall model/view interactions'''
     def __init__(self, rows: Iterable[Tuple[str, str]]):
         super().__init__()
 
@@ -25,7 +25,7 @@ class MainViewModel:
 
     def next_handler(self):
         '''Controls moving to the next quiz question, program exits when done'''
-        if (self.index < len(self.quizzes)):
+        if self.index < len(self.quizzes):
             current_quiz = self.quizzes[self.index]
             self.view.question = current_quiz.question
             self.view.answers = current_quiz.all_answers

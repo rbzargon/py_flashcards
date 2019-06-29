@@ -16,7 +16,7 @@ from .answer import AnswerView
 
 
 class MainView(tk.Tk):
-
+    '''Main view with progress, question, and answer views'''
     def __init__(
             self, next_handler: Callable[[], None], maximum: int,
             *args, **kwargs):

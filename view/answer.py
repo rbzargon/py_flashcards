@@ -6,14 +6,15 @@ Term project
 Flashcard application GUI - view to hold answers
 """
 
+from functools import partial
 import tkinter as tk
 from tkinter import ttk
 from typing import Callable, Iterable
 from utils import pad_children
-from functools import partial
 
 
 class AnswerView(ttk.LabelFrame):
+    '''Responsible for visual representation of quiz answers'''
     CORRECT_STYLE = {'bg': 'green', 'wraplength': 160, 'width': 20}
     INCORRECT_STYLE = {'bg': 'red', 'wraplength': 160, 'width': 20}
     BUTTON_STYLE = {'bg': 'white', 'wraplength': 160, 'width': 20}
