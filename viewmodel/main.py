@@ -21,7 +21,7 @@ class MainViewModel:
         self.quizzes = tuple(quiz_model)
         self.index = 0
         self.view = MainView(next_handler=self.next_handler,
-                             maximum=len(self.quizzes)-1)
+                             maximum=len(self.quizzes))
         self.next_handler()
 
     def next_handler(self):
