@@ -23,17 +23,17 @@ class MainViewModel:
         self._index = 0
         self.view = MainView(parent=parent,
                              next_handler=self.next_handler,
-                             maximum=len(self.quizzes))
+                             maximum=len(self._quizzes))
         self.next_handler()
 
     def next_handler(self):
         '''Controls moving to the next quiz question, program exits when done'''
-        if self.index < len(self.quizzes):
+        if self.index < len(self._quizzes):
             current_quiz = self._quizzes[self._index]
             self.view.question = current_quiz.question
             self.view.answers = current_quiz.all_answers
             self.view.correct_answer = current_quiz.answer
             self.view.progress_value = self._index
-            self.index += 1
+            self._index += 1
         else:
             exit(0)
