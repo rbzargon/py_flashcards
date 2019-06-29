@@ -8,11 +8,12 @@ Flashcard application - main application
 
 import csv
 import tkinter as tk
+from tkinter import filedialog
 from typing import Iterable, Tuple
 
 from sys import stderr
 
-from controller.main import MainController
+from viewmodel.main import MainViewModel
 
 
 class App(tk.Tk):
@@ -20,8 +21,8 @@ class App(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        rows = App.get_rows_from_file()
-        controller = MainController(rows)
+        self.rows = App.get_rows_from_file()
+        self.viewmodel = MainViewModel(self.rows)
 
     @staticmethod
     def get_rows_from_file() -> Iterable[Tuple[str, str]]:
@@ -29,11 +30,11 @@ class App(tk.Tk):
         entries per line (a question and an answer), returns the rows'''
         file_valid = False
         while not file_valid:
-            # file_name = filedialog.askopenfilename(
-            #     filetypes=(('Csv files', '*.csv'), ('All types', '*')),
-            #     title="Choose a flashcard Q/A csv with semicolon delimiters...")
+            file_name = filedialog.askopenfilename(
+                filetypes=(('Csv files', '*.csv'), ('All types', '*')),
+                title="Choose a flashcard Q/A csv with semicolon delimiters...")
             try:
-                with open('planets.csv', 'r', newline='') as in_csv:
+                with open(file_name, 'r', newline='') as in_csv:
                     input_reader = csv.reader(in_csv, delimiter=';')
                     rows = [*input_reader]
                     if all([length == 2 for length in map(len, rows)]):
