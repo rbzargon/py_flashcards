@@ -54,16 +54,8 @@ class AnswerView(ttk.LabelFrame):
         for answer_button in self._answers:
             if answer_button['text'] == answer:
                 button_handler = partial(
-                    self.correct_handler, button=answer_button)
+                    self._correct_handler, button=answer_button)
                 answer_button.config(command=button_handler)
-
-    def correct_handler(self, button: tk.Button) -> None:
-        '''Change the button style and call for next after one second'''
-        button.config(**AnswerView.CORRECT_STYLE)
-        button.after(1000, func=self.next_handler)
-
-    def incorrect_handler(self, button: tk.Button) -> None:
-        button.config(**AnswerView.INCORRECT_STYLE)
 
     @property
     def answers(self) -> Iterable[str]:
@@ -73,7 +65,15 @@ class AnswerView(ttk.LabelFrame):
     def answers(self, answers: Iterable[str]) -> None:
         for answer_button, answer in zip(self._answers, answers):
             button_handler = partial(
-                self.incorrect_handler, button=answer_button)
+                self._incorrect_handler, button=answer_button)
             answer_button.config(command=button_handler,
                                  text=answer,
                                  **AnswerView.BUTTON_STYLE)
+
+    def _correct_handler(self, button: tk.Button) -> None:
+        '''Change the button style and call for next after one second'''
+        button.config(**AnswerView.CORRECT_STYLE)
+        button.after(1000, func=self.next_handler)
+
+    def _incorrect_handler(self, button: tk.Button) -> None:
+        button.config(**AnswerView.INCORRECT_STYLE)
