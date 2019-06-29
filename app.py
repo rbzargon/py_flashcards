@@ -19,8 +19,9 @@ from viewmodel.main import MainViewModel
 class App(tk.Tk):
     '''Main flashcard app class'''
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, title: str = 'PyFlashcards', *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.winfo_toplevel().title(title)
         self.rows = self.get_rows_from_file()
         self.viewmodel = MainViewModel(parent=self, rows=self.rows)
 
@@ -68,7 +69,7 @@ class App(tk.Tk):
 
 if __name__ == '__main__':
     app = App()
-    app.title = 'PyFlashcards'
     app.columnconfigure(0, weight=1)
     app.rowconfigure(0, weight=1)
     app.mainloop()
+    app.destroy()
