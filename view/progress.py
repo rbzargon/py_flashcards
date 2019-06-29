@@ -11,6 +11,7 @@ from utils import pad_children
 
 
 class ProgressView(ttk.Frame):
+    '''Class for displaying a progress bar'''
 
     def __init__(self, parent, maximum, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
