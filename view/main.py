@@ -32,7 +32,7 @@ class MainView(tk.Tk):
 
         self.progress_view = ProgressView(self.frame, maximum)
         self.question_view = QuestionView(self.frame)
-        self.answer_view = AnswerView(self.frame, correct_handler=next_handler)
+        self.answer_view = AnswerView(self.frame, next_handler=next_handler)
 
         self.progress_view.grid(row=0, sticky='nsew', )
         self.question_view.grid(row=1, sticky='nsew', pady='10')
