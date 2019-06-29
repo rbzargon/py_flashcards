@@ -36,7 +36,8 @@ class App(tk.Tk):
             App.withdraw(self)
             try:
                 with open(file_name, 'r', newline='') as in_csv:
-                    input_reader = csv.reader(in_csv, delimiter=';')
+                    input_reader = csv.reader(App.noncomment_filter(in_csv),
+                                              delimiter=';')
                     rows = [*input_reader]
                     if all([length == 2 for length in map(len, rows)]):
                         file_valid = True
@@ -59,6 +60,10 @@ class App(tk.Tk):
                 print(f'Error opening file: {e}', file=stderr)
 
         return rows
+
+    @staticmethod
+    def noncomment_filter(rows):
+        return filter(lambda row: row.lstrip()[0] != '#', rows)
 
 
 if __name__ == '__main__':
